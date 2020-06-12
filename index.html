@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Heart_Disease_API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>Heart Disease Analysis</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+	
+		<input type="Age" min="1" max="100">
+		
+		<select id="Gender" name="Gender">
+			<option value="1">Male</option>
+			<option value="0">Female</option>
+		</select>
+
+		<select id="Chest pain type" name="Chest pain type">
+			<option value="0">Typical Angina</option>
+			<option value="1">Atypical Angina</option>
+			<option value="2">Non-Anginal pain</option>
+			<option value="3">Asymptomatic</option>
+			
+		</select>
+		
+		
+		
+		<input type="text" name="Resting blood pressure" 				placeholder="Resting blood pressure" required="required" />
+		<input type="text" name="Serum cholestoral in mg/dl" 			placeholder="Serum cholestoral in mg/dl" required="required" />
+		
+		
+		<select id="Fasting blood sugar" name="Fasting blood sugar">
+			<option value="1">Yes</option>
+			<option value="0">No</option>
+			
+		</select>
+		
+		
+		<select id="Resting electrocardiographic results" name="Resting electrocardiographic results">
+			<option value="0">Normal</option>
+			<option value="1">ST-T wave abnormality</option>
+			<option value="2">Showing probable or definite left ventricular hypertrophy by Estes' criteria</option>
+		</select>
+		
+		<input type="text" name="Maximum heart rate achieved" 			placeholder="Maximum heart rate achieved" required="required" />
+		
+		<select id="Exercise induced angina" name="Exercise induced angina">
+			<option value="1">Yes</option>
+			<option value="0">No</option>
+			
+		</select>
+		
+		<input type="text" name="oldpeak = ST depression induced by exercise relative to rest" 					placeholder="oldpeak = ST depression induced by exercise relative to rest" required="required" />
+		
+		<select id="The slope of the peak exercise ST segment" name="The slope of the peak exercise ST segment">
+			<option value="1">Flat</option>
+			<option value="0">Upsloping</option>
+			<option value="2">Downsloping</option>
+			
+		</select>
+		
+		
+		<select id="Number of major vessels colored by flourosopy" name="Number of major vessels colored by flourosopy">
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			
+		</select>
+		
+		
+		<select id="Thal" name="Thal">
+			<option value="1">Normal</option>
+			<option value="2">Fixed defect</option>
+			<option value="3">Reversable defect</option>
+			
+		</select>
+		
+		<select id="Diagnosis of heart disease (angiographic disease status)" name="Diagnosis of heart disease (angiographic disease status)">
+			<option value="0">Less than 50% diameter narrowing</option>
+			<option value="1">More than 50% diameter narrowing</option>
+			
+		</select>
+		
+		
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Analyse</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+</body>
+</html>
