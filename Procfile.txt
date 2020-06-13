@@ -1,1 +1,1 @@
- heroku flask_app:app web=1
+web gunicorn flask_app:app
