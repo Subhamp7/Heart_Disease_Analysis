@@ -73,6 +73,8 @@ scores(Y_pred_svm,Y_test,'Support_Vector_machine')
 
 #so the best is logistic regression
 #saving model to disk
+pickle.dump(lr, open('LR_model.pkl', 'wb'))
+pickle.dump(knn, open('KNN_model.pkl', 'wb'))
 pickle.dump(svm, open('SVM_model.pkl', 'wb'))
 
 #test the pickle file
