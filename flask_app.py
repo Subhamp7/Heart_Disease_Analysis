@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Jun 11 18:56:32 2020
-
 @author: subham
 """
 import numpy as np
@@ -32,4 +31,3 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True)
-

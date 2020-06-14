@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Jun 11 19:31:10 2020
-
 @author: subham
 """
 #importing the libraries
@@ -74,11 +73,12 @@ scores(Y_pred_svm,Y_test,'Support_Vector_machine')
 #so the best is logistic regression
 #saving model to disk
 pickle.dump(lr, open('LR_model.pkl', 'wb'))
-pickle.dump(knn, open('KNN_model.pkl', 'wb'))
-pickle.dump(svm, open('SVM_model.pkl', 'wb'))
+
 
 #test the pickle file
-model=pickle.load(open('SVM_model.pkl', 'rb'))
-print(model.predict(dataset_X[20,:].reshape(1,-1)))
+model=pickle.load(open('LR_model.pkl', 'rb'))
+value=dataset_X[20,:].reshape(1,-1)
+real=dataset_Y[20,:]
+print(("\n The value predicted is : {} and the real value is : {} ").format(model.predict(value), real))
 
 print('\nCompleted')
