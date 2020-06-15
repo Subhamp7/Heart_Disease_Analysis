@@ -3,104 +3,197 @@
 <head>
   <meta charset="UTF-8">
   <title>Heart_Disease_API</title>
-  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-  
+	
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
 </head>
 
-<body>
- <div class="login">
-	<h1>Heart Disease Analysis</h1>
+<body class="heart__analysis__container">
+ <div class="login container">
+	<h1 class="header">Heart Disease Analysis</h1>
 
      <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}"method="post">
-	
-		<input type="Age" min="1" max="100">
+    <form action="{{ url_for('predict')}}" method="post" class="form">
+		<div class="row">
+			<div class="col-25">
+				<label for="fname">Enter Age</label>
+			</div>
+			<div class="col-75">
+				<input type="number" min="1" max="100" placeholder="Age">
+			</div>
+		</div>
 		
-		<select id="Gender" name="Gender">
-			<option value="1">Male</option>
-			<option value="0">Female</option>
-		</select>
+		<!-- <label>Gender</label> -->
+		<div class="row">
+			<div class="col-25">
+				<label for="fname">Gender</label>
+			</div>
+			<div class="col-75">
+				<select id="Gender" name="Gender">
+					<option value="1">Male</option>
+					<option value="0">Female</option>
+				</select>
+			</div>
+		</div>
 
-		<select id="Chest pain type" name="Chest pain type">
-			<option value="0">Typical Angina</option>
-			<option value="1">Atypical Angina</option>
-			<option value="2">Non-Anginal pain</option>
-			<option value="3">Asymptomatic</option>
-			
-		</select>
-		
-		
-		
-		<input type="text" name="Resting blood pressure" 				placeholder="Resting blood pressure" required="required" />
-		<input type="text" name="Serum cholestoral in mg/dl" 			placeholder="Serum cholestoral in mg/dl" required="required" />
-		
-		
-		<select id="Fasting blood sugar" name="Fasting blood sugar">
-			<option value="1">Yes</option>
-			<option value="0">No</option>
-			
-		</select>
-		
-		
-		<select id="Resting electrocardiographic results" name="Resting electrocardiographic results">
-			<option value="0">Normal</option>
-			<option value="1">ST-T wave abnormality</option>
-			<option value="2">Showing probable or definite left ventricular hypertrophy by Estes' criteria</option>
-		</select>
-		
-		<input type="text" name="Maximum heart rate achieved" 			placeholder="Maximum heart rate achieved" required="required" />
-		
-		<select id="Exercise induced angina" name="Exercise induced angina">
-			<option value="1">Yes</option>
-			<option value="0">No</option>
-			
-		</select>
-		
-		<input type="text" name="oldpeak = ST depression induced by exercise relative to rest" 					placeholder="oldpeak = ST depression induced by exercise relative to rest" required="required" />
-		
-		<select id="The slope of the peak exercise ST segment" name="The slope of the peak exercise ST segment">
-			<option value="1">Flat</option>
-			<option value="0">Upsloping</option>
-			<option value="2">Downsloping</option>
-			
-		</select>
-		
-		
-		<select id="Number of major vessels colored by flourosopy" name="Number of major vessels colored by flourosopy">
-			<option value="0">0</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			
-		</select>
-		
-		
-		<select id="Thal" name="Thal">
-			<option value="1">Normal</option>
-			<option value="2">Fixed defect</option>
-			<option value="3">Reversable defect</option>
-			
-		</select>
-		
-		<select id="Diagnosis of heart disease (angiographic disease status)" name="Diagnosis of heart disease (angiographic disease status)">
-			<option value="0">Less than 50% diameter narrowing</option>
-			<option value="1">More than 50% diameter narrowing</option>
-			
-		</select>
-		
-		
+		<div class="row">
+			<div class="col-25">
+				<label>Chest Pain Type</label>
+			</div>
+			<div class="col-75">
+				<select id="Chest pain type" name="Chest pain type">
+				<option value="0">Typical Angina</option>
+				<option value="1">Atypical Angina</option>
+				<option value="2">Non-Anginal pain</option>
+				<option value="3">Asymptomatic</option>
+				</select>
+			</div>
+		</div>
 
-        <button type="submit" class="btn btn-primary btn-block btn-large">Analyse</button>
+		<div class="row">
+			<div class="col-25">
+				<label>Resting blood pressure</label>
+			</div>
+			<div class="col-75">
+				<input type="text" name="Resting blood pressure" placeholder="Resting blood pressure" required="required" />
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-25">
+				<label>Serum cholestoral in mg/dl</label>
+			</div>
+			<div class="col-75">
+				
+				<input type="text" name="Serum cholestoral in mg/dl" placeholder="Serum cholestoral in mg/dl" required="required" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-25">
+				<label>Fasting blood sugar</label>
+			</div>
+			<div class="col-75">
+				<select id="Fasting blood sugar" name="Fasting blood sugar">
+				<option value="1">Yes</option>
+				<option value="0">No</option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-25">
+				<label>Resting electrocardiographic results</label>
+			</div>
+			<div class="col-75">
+				<select id="Resting electrocardiographic results" name="Resting electrocardiographic results">
+					<option value="0">Normal</option>
+					<option value="1">ST-T wave abnormality</option>
+					<option value="2">Showing probable or definite left ventricular hypertrophy by Estes' criteria</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-25">
+				<label>Maximum heart rate achieved</label>
+			</div>
+			<div class="col-75">
+				<input type="text" name="Maximum heart rate achieved" placeholder="Maximum heart rate achieved" required="required" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-25">
+				<label>Exercise induced angina</label>
+			</div>
+			<div class="col-75">
+				<select id="Exercise induced angina" name="Exercise induced angina">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-25">
+				<label>ST depression</label>
+			</div>
+			<div class="col-75">
+				<input type="text" name="oldpeak = ST depression induced by exercise relative to rest" placeholder="oldpeak = ST depression induced by exercise relative to rest" required="required" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-25">
+				<label>ST segment</label>
+			</div>
+			<div class="col-75">
+				<select id="The slope of the peak exercise ST segment" name="The slope of the peak exercise ST segment">
+					<option value="1">Flat</option>
+					<option value="0">Upsloping</option>
+					<option value="2">Downsloping</option>
+				</select>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-25">
+				<label>Number of major vessels(Flourosopy)</label>
+			</div>
+			<div class="col-75">
+				<select id="Number of major vessels colored by flourosopy" name="Number of major vessels colored by flourosopy">
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				</select>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-25">
+				<label>Thal</label>
+			</div>
+			<div class="col-75">
+				<select id="Thal" name="Thal">
+					<option value="1">Normal</option>
+					<option value="2">Fixed defect</option>
+					<option value="3">Reversable defect</option>
+				</select>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-25">
+				<label>Angiographic disease status</label>
+			</div>
+			<div class="col-75">
+				<select id="Diagnosis of heart disease (angiographic disease status)" name="Diagnosis of heart disease (angiographic disease status)">
+					<option value="0">Less than 50% diameter narrowing</option>
+					<option value="1">More than 50% diameter narrowing</option>
+				</select>
+			</div>
+		</div>
+		
+		<span class="button__wrapper">
+			<button type="submit" class="analyse__btn">Analyse</button>
+		</span>
     </form>
-
-   <br>
-   <br>
+   <br> <br>
    {{ prediction_text }}
-
- </div>
+ 
+<div class='footer'>
+           <div class="contact">
+               <a target="_blank" href="https://github.com/Subhamp7"><i class="fab fa-github fa-lg contact-icon"></i></a>
+               <a target="_blank" href="https://www.linkedin.com/in/Subhamp7"><i class="fab fa-linkedin fa-lg contact-icon"></i></a>
+           </div>
+           <p class='footer-description'>Made by Subham Prasad.</p>
+			</div>
+			
+</div>			
 </body>
 </html>
