@@ -74,7 +74,6 @@ scores(Y_pred_svm,Y_test,'Support_Vector_machine')
 #saving model to disk
 pickle.dump(lr, open('LR_model.pkl', 'wb'))
 
-
 #test the pickle file
 model=pickle.load(open('LR_model.pkl', 'rb'))
 value=dataset_X[20,:].reshape(1,-1)
