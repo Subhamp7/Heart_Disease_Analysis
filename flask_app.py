@@ -3,32 +3,44 @@
 Created on Thu Jun 11 18:56:32 2020
 @author: subham
 """
-import numpy as np
-from flask import Flask, request, jsonify, render_template
 import pickle
+import numpy 
+from   flask import Flask, request, render_template
 
-app = Flask(__name__,static_url_path='/static')
-model = pickle.load(open('LR_model.pkl', 'rb'))
+
+app   = Flask(__name__,static_url_path='/static')
+
+#loading the models
+model = pickle.load(open('ml_model.pkl', 'rb'))
+enco  = pickle.load(open('encoder.pkl',  'rb'))
+scal  = pickle.load(open('scaling.pkl',  'rb'))
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
-@app.route('/predict',methods=['POST'])
+@app.route('/predict',methods=['GET','POST'])
 def predict():
     '''
     For rendering results on HTML GUI
     '''
-    int_features = [float(x) for x in request.form.values()]
-   
-    final_features = (np.array(int_features)).reshape(1,-1)
-    prediction = model.predict(final_features)
-    if(prediction==0):
-        output='Hurray!!! You are Safe'
-    else:
-        output='OOPS!!! You need medical attention'
+    try:
+        attibutes        = ["Age", "Gender","CP", "RBP", "SC", "FBS","RER", 
+                            "MHR", "EIA", "ST", "SST", "Flourosopy", "Thal"]
+        attibutes_val    = [float(request.form[items]) for items in attibutes]
+        attibutes_array  = (numpy.array(attibutes_val)).reshape(1,-1)
+        attibutes_encode = enco.transform(attibutes_array)
+        attibutes_array  = scal.transform(attibutes_encode)
+        prediction       = model.predict(attibutes_array)
+        
+        if(prediction==1):
+            output = 'OOPS!!! You need medical attention'
+        else:
+            output = 'Hurray!!! You are Safe'
+    except:
+        output = "Sorry!!!! Some internal issue occured, Please visit the home page and try again" 
+        
     return render_template('index_predict.html', prediction_text=output)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
