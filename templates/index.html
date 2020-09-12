@@ -5,14 +5,15 @@
   <link href="/static/index_HD.css" rel="stylesheet">
   
   <title>Heart_Disease_API</title>
-	
+	<link rel = "icon" href = "/static/love.png" >
+	 
 </head>
 
 <body class="heart__analysis__container">
 	<!-- <img src="bg.jpg"></img> -->
  <div class="login container">
 	 <h1 class="header">
-		 <img src="{{ url_for('static', filename='love.png') }}" class="heart__icon"/>
+		 <a href="/" ><img src="{{ url_for('static', filename='love.png') }}" class="heart__icon"/></a>	
 		 <span class="title">
 			Heart Disease Analysis
 		</span>
@@ -22,12 +23,14 @@
 	 <!-- Main Input For Receiving Query to our ML -->
 	 <div class="form__container">
     <form action="{{ url_for('predict')}}" method="post" class="form">
+	
+		<!-- <label>Age</label> -->
 		<div class="row">
 			<div class="col-25">
 				<label for="fname">Age</label>
 			</div>
 			<div class="col-75">
-				<input type="number" min="1" max="100" placeholder="Age">
+				<input name="Age" type="number" min="1" max="100" placeholder="Age">
 			</div>
 		</div>
 		
@@ -49,7 +52,7 @@
 				<label>Chest pain type</label>
 			</div>
 			<div class="col-75">
-				<select id="Chest pain type" name="Chest pain type">
+				<select id="Chest pain type" name="CP">
 				<option value="0">Typical Angina</option>
 				<option value="1">Atypical Angina</option>
 				<option value="2">Non-Anginal pain</option>
@@ -63,7 +66,7 @@
 				<label>Resting blood pressure</label>
 			</div>
 			<div class="col-75">
-				<input type="text" name="Resting blood pressure" placeholder="Resting blood pressure(0-300)" required="required" autocomplete="off"/>
+				<input type="text" name="RBP" placeholder="Resting blood pressure(0-300)" required="required" autocomplete="off"/>
 			</div>
 		</div>
 		
@@ -72,7 +75,7 @@
 				<label>Serum cholestoral</label>
 			</div>
 			<div class="col-75">
-				<input type="text" name="Serum cholestoral in mg/dl" placeholder="Serum cholestoral(0-600)mg/dl" required="required" autocomplete="off"/>
+				<input type="text" name="SC" placeholder="Serum cholestoral(0-600)mg/dl" required="required" autocomplete="off"/>
 				</div>
 		</div>
 
@@ -81,7 +84,7 @@
 				<label>Fasting blood sugar</label>
 			</div>
 			<div class="col-75">
-				<select id="Fasting blood sugar" name="Fasting blood sugar">
+				<select id="Fasting blood sugar" name="FBS">
 				<option value="1">Yes</option>
 				<option value="0">No</option>
 				</select>
@@ -93,7 +96,7 @@
 				<label>Resting electrocardiographic results</label>
 			</div>
 			<div class="col-75">
-				<select id="Resting electrocardiographic results" name="Resting electrocardiographic results">
+				<select id="Resting electrocardiographic results" name="RER">
 					<option value="0">Normal</option>
 					<option value="1">ST-T wave abnormality</option>
 					<option value="2">Showing probable or definite left ventricular hypertrophy by Estes' criteria</option>
@@ -106,7 +109,7 @@
 				<label>Maximum heart rate achieved</label>
 			</div>
 			<div class="col-75">
-				<input type="text" name="Maximum heart rate achieved" placeholder="Maximum heart rate achieved(0-300)" required="required" autocomplete="off" />
+				<input type="text" name="MHR" placeholder="Maximum heart rate achieved(0-300)" required="required" autocomplete="off" />
 			</div>
 		</div>
 
@@ -115,7 +118,7 @@
 				<label>Exercise induced angina</label>
 			</div>
 			<div class="col-75">
-				<select id="Exercise induced angina" name="Exercise induced angina">
+				<select id="Exercise induced angina" name="EIA">
 					<option value="1">Yes</option>
 					<option value="0">No</option>
 				</select>
@@ -127,7 +130,7 @@
 				<label>ST depression</label>
 			</div>
 			<div class="col-75">
-				<input type="text" name="oldpeak = ST depression induced by exercise relative to rest" placeholder="ST depression induced by exercise relative to rest(0-10)" required="required" autocomplete="off"/>
+				<input type="text" name="ST" placeholder="ST depression induced by exercise relative to rest(0-10)" required="required" autocomplete="off"/>
 			</div>
 		</div>
 
@@ -136,7 +139,7 @@
 				<label>ST segment</label>
 			</div>
 			<div class="col-75">
-				<select id="The slope of the peak exercise ST segment" name="The slope of the peak exercise ST segment">
+				<select id="The slope of the peak exercise ST segment" name="SST">
 					<option value="1">Flat</option>
 					<option value="0">Upsloping</option>
 					<option value="2">Downsloping</option>
@@ -150,7 +153,7 @@
 				<label>Number of major vessels(Flourosopy)</label>
 			</div>
 			<div class="col-75">
-				<select id="Number of major vessels colored by flourosopy" name="Number of major vessels colored by flourosopy">
+				<select id="Number of major vessels colored by flourosopy" name="Flourosopy">
 					<option value="0">0</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -175,24 +178,12 @@
 		</div>
 
 
-		<div class="row">
-			<div class="col-25">
-				<label>Angiographic disease status</label>
-			</div>
-			<div class="col-75">
-				<select id="Diagnosis of heart disease (angiographic disease status)" name="Diagnosis of heart disease (angiographic disease status)">
-					<option value="0">Less than 50% diameter narrowing</option>
-					<option value="1">More than 50% diameter narrowing</option>
-				</select>
-			</div>
-		</div>
 		
 		<span class="button__wrapper">
 			<button type="submit" class="analyse__btn" >Analyse</button>
 		</span>
 		
 		
-		{{prediction_text}}
 		
 	</form>
 </div>
