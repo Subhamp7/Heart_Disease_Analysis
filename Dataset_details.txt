@@ -72,9 +72,3 @@ ca: number of major vessels (0-3) colored by flourosopy
 
 13.Thal (values: 1,2,3)
 1 = normal; 2 = fixed defect; 3 = reversable defect
-
-14.Num (values: 0,1)
-num: diagnosis of heart disease (angiographic disease status)
--- Value 0: < 50% diameter narrowing
--- Value 1: > 50% diameter narrowing
-(in any major vessel: attributes 59 through 68 are vessels)
