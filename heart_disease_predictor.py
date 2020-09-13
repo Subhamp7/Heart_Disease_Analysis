@@ -9,7 +9,7 @@ try:
     import pickle
     import pandas                 as pd
     import numpy                  as np
-    from sklearn.preprocessing    import OneHotEncoder, StandardScaler
+    from sklearn.preprocessing    import OneHotEncoder
     from sklearn.compose          import ColumnTransformer
     from sklearn.model_selection  import train_test_split, cross_val_score, RandomizedSearchCV, GridSearchCV
     from sklearn.ensemble         import RandomForestClassifier
@@ -39,9 +39,6 @@ dataset_Y=dataset.iloc[:, 13:14].values
 ct=ColumnTransformer([('encoder', OneHotEncoder(drop='first'), [2,6,10,11,12])], remainder='passthrough')
 dataset_X = ct.fit_transform(dataset_X)
 
-#scaling the dataset
-sc=StandardScaler()
-dataset_X=sc.fit_transform(dataset_X)
 
 #splitting data to training set and test set
 X_train, X_test, Y_train, Y_test =train_test_split(dataset_X, dataset_Y, test_size=0.3 , random_state=0)
@@ -153,7 +150,6 @@ scores(pred_2,Y_test,'RandomForestClassifier')
 
 pickle.dump(best_grid_lr, open('ml_model.pkl', 'wb'))
 pickle.dump(ct,           open('encoder.pkl',  'wb'))
-pickle.dump(sc,           open('scaling.pkl',  'wb'))
 
 #==============================Testing model response============================
 #test the pickle file
