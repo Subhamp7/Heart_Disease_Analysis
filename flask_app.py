@@ -30,8 +30,9 @@ def predict():
     attibutes_val    = [float(request.form[items]) for items in attibutes]
     attibutes_array  = (numpy.array(attibutes_val)).reshape(1,-1)
     attibutes_encode = enco.transform(attibutes_array)
-    attibutes_array  = scal.transform(attibutes_encode)
-    prediction       = model.predict(attibutes_array)
+  
+
+    prediction       = model.predict(attibutes_encode)
     
     if(prediction==1):
         output = 'OOPS!!! You need medical attention'
@@ -42,4 +43,4 @@ def predict():
     return render_template('index_predict.html', prediction_text=output)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)
